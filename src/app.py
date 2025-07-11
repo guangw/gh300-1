@@ -65,3 +65,16 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+@app.get("/cities/{country}")
+def get_cities(country: str):
+    """Get cities by country"""
+    # In a real application, you would query a database or an external API
+    # Here, we'll use a static dictionary for demonstration purposes
+    cities = {
+        "USA": ["New York", "Los Angeles", "Chicago"],
+        "Canada": ["Toronto", "Vancouver", "Montreal"],
+        "UK": ["London", "Manchester", "Birmingham"],
+        "Spain": ["Seville"]
+    }
+    return {"cities": cities.get(country, [])}
