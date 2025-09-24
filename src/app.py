@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
+import uvicorn
 
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
@@ -112,3 +113,9 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+if __name__ == "__main__":
+    # Allow running this module directly: python src/app.py
+    # Use uvicorn to serve the FastAPI app. Host 127.0.0.1 and port 8000 by default.
+    uvicorn.run("src.app:app", host="127.0.0.1", port=8000, reload=True)
